@@ -1,0 +1,3 @@
+# Copy this file to local.properties and insert the Native App Key from Kakao Developers.
+# This file is intentionally not committed.
+kakaoMapKey=PASTE_YOUR_NATIVE_APP_KEY_HERE
