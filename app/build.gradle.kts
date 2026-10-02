@@ -1,4 +1,6 @@
 import java.util.Properties
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 plugins {
     id("com.android.application")
@@ -11,6 +13,8 @@ val localProperties = Properties().apply {
     if (file.exists()) file.inputStream().use(::load)
 }
 val kakaoMapKey = localProperties.getProperty("kakaoMapKey", "")
+val kakaoRestKey = localProperties.getProperty("kakaoRestKey", "")
+val buildDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 
 android {
     namespace = "com.campinginfo"
@@ -36,6 +40,15 @@ android {
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
 }
 
+base { archivesName.set("HaWoongCamping") }
+
+android.applicationVariants.all {
+    outputs.all {
+        @Suppress("DEPRECATION")
+        (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = "HaWoongCamping.apk"
+    }
+}
+
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
     implementation("androidx.core:core-ktx:1.15.0")
@@ -51,3 +64,5 @@ dependencies {
 }
 
 android.defaultConfig.buildConfigField("String", "KAKAO_MAP_KEY", "\"$kakaoMapKey\"")
+android.defaultConfig.buildConfigField("String", "KAKAO_REST_KEY", "\"$kakaoRestKey\"")
+android.defaultConfig.buildConfigField("String", "BUILD_DATE", "\"$buildDate\"")

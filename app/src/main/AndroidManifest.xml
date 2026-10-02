@@ -3,7 +3,9 @@
     <application
         android:name=".CampingApplication"
         android:allowBackup="true"
-        android:label="캠핑 노트"
+        android:label="하웅캠핑"
+        android:icon="@drawable/ha_woong_camping_icon"
+        android:roundIcon="@drawable/ha_woong_camping_icon"
         android:theme="@style/Theme.CampingInfo">
         <activity android:name=".MainActivity" android:screenOrientation="portrait" android:exported="true">
             <intent-filter>
