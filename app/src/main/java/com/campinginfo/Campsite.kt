@@ -1,5 +1,7 @@
 package com.campinginfo
 
+data class VisitRecord(val date: String = "", val rating: Int = 0, val review: String = "")
+
 data class Campsite(
     val id: Long = System.currentTimeMillis(), val name: String, val region: String,
     val address: String = "", val price: String = "", val phone: String = "",
@@ -9,8 +11,13 @@ data class Campsite(
     val privateBathroom: Boolean = false, val electricity: Boolean = false,
     val shower: Boolean = false, val parking: Boolean = false, val wifi: Boolean = false,
     val visitCount: Int = 0, val imageUri: String? = null, val imageUris: List<String> = emptyList(),
-    val hasTarp: Boolean = false, val checkInTime: String = "", val checkOutTime: String = ""
+    val hasTarp: Boolean = false, val checkInTime: String = "", val checkOutTime: String = "",
+    val quietTime: String = "", val status: String = "가고 싶음", val visitDate: String = "",
+    val rating: Int = 0, val review: String = "", val visits: List<VisitRecord> = emptyList()
 )
+
+val Campsite.allVisits: List<VisitRecord>
+    get() = visits.ifEmpty { if (visitDate.isNotBlank() || rating > 0 || review.isNotBlank()) listOf(VisitRecord(visitDate, rating, review)) else emptyList() }
 
 object Regions {
     val all = listOf("전체", "서울", "경기", "인천", "강원도", "충청도", "전라도", "경상도", "제주도")
