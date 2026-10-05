@@ -4,3 +4,7 @@
 /local.properties
 /.idea
 *.iml
+/.android-build/
+/.kotlin/
+/.temp/
+*.apk
